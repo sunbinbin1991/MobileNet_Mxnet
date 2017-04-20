@@ -45,7 +45,7 @@ def MobileNet_feature(alpha):
 def MobileNet(alpha):
 	fea = MobileNet_feature(alpha)
 	flat = mx.symbol.Flatten(data=fea)
-	fc = mx.symbol.FullyConnected(data=flat, num_hidden=10574, name='predictions')
+	fc = mx.symbol.FullyConnected(data=flat, num_hidden=1000, name='predictions')
 	softmax = mx.symbol.SoftmaxOutput(data=fc, name='softmax')
 	return softmax
 
@@ -103,7 +103,7 @@ def main():
 		epoch_end_callback = checkpoint)
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(description="command for training lightened-cnn")
+	parser = argparse.ArgumentParser(description="command for training imagenet")
 	parser.add_argument('--gpus', type=str, default='1', help='the gpus will be used, e.g "0,1,2,3"')
 	parser.add_argument('--model_save_prefix', type=str, default='./models/MobileNet1', help='the prefix of the model to save')
 	#0.05
